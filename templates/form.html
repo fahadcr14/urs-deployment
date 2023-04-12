@@ -1,0 +1,157 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+
+    <title>University Recommenders - Log in</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+
+  </head>
+
+
+  <body class="img1-fill">
+   
+    
+    <!-- Header -->
+    <div class="ict-header">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-xs-12">
+            <ul class="left-info">
+              <li><a href="index">URS</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <ul class="right-icons">
+              <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+              <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+              <li><a href="#"><i class="fa fa-behance"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <header class="">
+        <nav class="navbar navbar-expand-lg">
+          <div class="container">
+            <a class="navbar-brand" href="index="><h2>University Recommenders</h2></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="True" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="index">Home
+                    <span class="sr-only">(current)</span>
+                  </a>
+                </li>
+                <li class="nav-item ">
+                  <a class="nav-link" href="about">About Us</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="getyourdestination">Get Your Destination</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="contact">Contact Us</a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="form">Log in</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+    <div>
+      {% for message in messages %}
+      <h3 style="color: red; position: absolute;margin-top: -38px; margin-left: 100px; font-size: 15; font-family: 'Courier New', Courier, monospace;">{{message}}</h3>
+      {% endfor %}
+        <form action="form" method="post">
+          {% csrf_token %}
+            <div class ="form1">
+                
+                    <input type="text" name="username" required="" placeholder="Username"><br><br>
+                    <input type="password" name="password" required="" placeholder="Password"><br><br>
+            
+                
+                <button class="btn btn-primary" >Log in</button><br><br>
+                <span>
+                    <u><h6 style="color: aliceblue;">Dont have a account? 
+                        <a href="newaccountform">Create a new one!</a></h6><br></u>
+              </div>
+            </form>
+      </div>
+    </div>
+
+    <!-- Footer Starts Here -->
+    <footer>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3 footer-item">
+              <h4>University Recommendation System</h4>
+              <p>Always there for you!</p>
+              <ul class="social-icons">
+                <li><a rel="nofollow" href="https://fb.com/templatemo" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                <li><a href="#"><i class="fa fa-behance"></i></a></li>
+              </ul>
+            </div>
+            <div class="col-md-3 footer-item">
+              <h4>Useful Links</h4>
+              <ul class="menu-list">
+                <li><a href="index">Home</a></li>
+                <li><a href="about">About</a></li>
+                <li><a href="getyourdestination">Get Your Destination</a></li>
+                <li><a href="contact">Contact</a></li>
+              </ul>
+            </div>
+            <div class="col-md-6 footer-item last-item">
+              <h4>Contact Us</h4>
+              <div class="contact-form">
+                <form id="contact footer-contact" action="" method="post">
+                  <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                      <fieldset>
+                        <input name="name" type="text" class="form-control" id="name" placeholder="Full Name" required="">
+                      </fieldset>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                      <fieldset>
+                        <input name="email" type="text" class="form-control" id="email" pattern="[^ @]*@[^ @]*" placeholder="E-Mail Address" required="">
+                      </fieldset>
+                    </div>
+                    <div class="col-lg-12">
+                      <fieldset>
+                        <textarea name="message" rows="6" class="form-control" id="message" placeholder="Your Message" required=""></textarea>
+                      </fieldset>
+                    </div>
+                    <div class="col-lg-12">
+                      <fieldset>
+                        <button type="submit" id="form-submit" class="filled-button">Send Message</button>
+                      </fieldset>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </body>
+  </html>
+   

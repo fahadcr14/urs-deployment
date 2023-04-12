@@ -1,0 +1,324 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+
+    <title>DB Final Project</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+    <!-- Additional CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+  </head>
+
+  <body>
+
+
+    <!-- Header -->
+    <div class="ict-header">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-xs-12">
+            <ul class="left-info">
+              <li><a href="index">URS</a></li>              
+              <!-- <li class="logo"><img src="assets/images/logo.png" alt=""></li>               -->
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <ul class="right-icons">
+              <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+              <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+              <li><a href="#"><i class="fa fa-behance"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <header>
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a class="navbar-brand" href="index.html"><h2>University Recommendation System</h2></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="#top">Home
+                  <span class="sr-only">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="about">About Us</a>
+              </li>  
+              <li class="nav-item">
+                <a class="nav-link" href="getyourdestination">Get Your Destination</a>
+              </li>                          
+              <li class="nav-item">
+                <a class="nav-link" href='contact'>Contact Us</a>
+              </li>
+              <li class="nav-item">
+                {% if user.is_authenticated %}
+                <a class="nav-link" href="logout">Logout</a>
+                {% else %}
+                <a  class="nav-link"  href="form">Login</a>
+                {% endif %}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+
+    <!-- Banner -->
+    <div class="main-banner header-text" id="top">
+        <div class="Modern-Slider">
+          <div class="item item-1">
+            <div class="img-fill">
+                <div class="text-content">
+                  {% if user.is_authenticated %}
+                  <h4><br>Hello, {{user.username}}</h4>
+                  <h4>Ready to get your Destination!</h4>
+                  {% else %}
+                  <h6 style="color: gray;font:100; margin-top: 20px; position: absolute;">we are ready to help you</h6>
+                  <h4><br>Towards your journey in finding the right path to your desitination</h4>
+                  {% endif %}
+                  <a href="getyourdestination" class="filled-button">Get Your Destination</a>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <!-- Banner -->
+
+    <div class="request-form">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            <h4>Request a call back right now ?</h4>
+            <span>24/7 Available</span>
+          </div>
+          <div class="col-md-4">
+            <a href="contact" class="border-button">Contact Us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="purpose">
+      <h2><span style="color: #666666;">What does a university recommendation system do?</span></h2>
+      <p style="font-size: larger;">A university recommendation system is a software system that helps students, faculty, and staff to make informed decisions about courses, programs, and other university-related activities. The system uses data analytics and machine learning algorithms to analyze the academic history, interests, and preferences of users to provide personalized recommendations.</p>
+    </div>
+    <span data-purecounter-start="0" data-purecounter-end="65" data-purecounter-duration="2"></span>
+    <div class="services">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              <h2>URS <em>Services</em></h2>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="service-item">
+              <div title="Course recommendations">
+                <img src="{% static 'assets/images/service_01.jpg' %}" alt="">
+              </div> 
+              
+              <div class="down-content">
+               
+                <h4>Course recommendations</h4>
+                <p> The system recommends courses that are relevant to a student's interests and academic background, as well as courses that can help them meet their academic goals.</p>
+              
+              </div>
+              </div>
+            </div>
+          <div class="col-md-4">
+            <div class="service-item">
+              <div title="Program recommendations">
+                <img src="{% static 'assets/images/service_02.jpg' %}" alt="">
+              </div>
+              
+              <div class="down-content">
+                <h4>Program recommendations</h4>
+                <p>The system suggests degree programs or majors that align with a student's interests and career aspirations.</p>
+                
+              </div>
+          </div>
+          </div>
+          <div class="col-md-4">
+            <div class="service-item">
+              <div title="Career recommendations">
+              <img src="{% static 'assets/images/service_03.jpg' %}" alt="">
+              </div>
+              <div class="down-content">
+                <h4>Career recommendations</h4>
+                <p> The system provides career guidance and recommends internships, job opportunities, and networking events that can help students advance their careers.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="fun-facts">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="left-content">
+              <h2 class="animate">Our solutions for your <em>growth</em></h2>
+            </div>
+          </div>
+          <div class="col-md-6 align-self-center">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="count-area-content">
+                  <div class="count-digit">945</div>
+                  <div class="count-title">Work Hours</div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="count-area-content">
+                  <div class="count-digit">1280</div>
+                  <div class="count-title">Great Reviews</div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="count-area-content">
+                  <div class="count-digit">578</div>
+                  <div class="count-title">Projects Done</div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="count-area-content">
+                  <div class="count-digit">26</div>
+                  <div class="count-title">Awards Won</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <form action="" method="post" id="contact_form">
+    {% csrf_token %}
+    <div class="callback-form" style="margin-bottom: 60px;">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              <h2>Request a <em>call back</em></h2>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="contact-form">
+              <form id="contact" action="" method="post">
+                <div class="row">
+                  <div class="col-lg-4 col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="name" type="text" class="form-control" id="name" placeholder="Full Name" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-4 col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="email" type="text" class="form-control" id="email" pattern="[^ @]*@[^ @]*" placeholder="E-Mail Address" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-4 col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="subject" type="text" class="form-control" id="subject" placeholder="Subject" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12">
+                    <fieldset>
+                      <textarea name="message" rows="6" class="form-control" id="message" placeholder="Your Message" required=""></textarea>
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12">
+                    <fieldset>
+                      <button type="submit" id="form-submit" class="border-button"><a href="mailto:muzamiltariq123@gmail.com" style="color:white">Send Message</a></button>
+                    </fieldset>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+
+    <!-- Footer Starts Here -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 footer-item">
+            <h4>University Recommendation System</h4>
+            
+            <p>Always there for you!</p>
+            <ul class="social-icons">
+              <li><a rel="nofollow" href="https://fb.com/templatemo" target="_blank"><i class="fa fa-facebook"></i></a></li>
+              <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+              <li><a href="#"><i class="fa fa-behance"></i></a></li>
+            </ul>
+          </div>
+          <div class="col-md-3 footer-item">
+            <h4>Useful Links</h4>
+            <ul class="menu-list">
+              <li><a href="index">Home</a></li>
+              <li><a href="about">About</a></li>
+              <li><a href="getyourdestination">Get Your Destination</a></li>
+              <li><a href="contact">Contact</a></li>
+            </ul>
+          </div>
+          <div class="col-md-6 footer-item last-item">
+            <h4>Contact Us</h4>
+            <div class="contact-form">
+              <form id="contact footer-contact" action="" method="post">
+                <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="name" type="text" class="form-control" id="name" placeholder="Full Name" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="email" type="text" class="form-control" id="email" pattern="[^ @]*@[^ @]*" placeholder="E-Mail Address" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12">
+                    <fieldset>
+                      <textarea name="message" rows="6" class="form-control" id="message" placeholder="Your Message" required=""></textarea>
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12">
+                    <fieldset>
+                      <button type="submit" id="form-submit" class="filled-button">Send Message</button>
+                    </fieldset>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+    
+
+  </body>
+</html>
