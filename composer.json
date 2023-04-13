@@ -47,7 +47,7 @@
         "protobuf/protobuf": "^3.20.3",
         "psycopg2/psycopg2": "^2.9.6",
         "psycopg2-binary/psycopg2-binary": "^2.9.6",
-        "pyautogui/pyautogui": "^0.
+        "pyautogui/pyautogui": "^0,
         "guzzlehttp/guzzle": "^7.4",
         "psr/http-message": "^1.0",
         "psr/log": "^1.1",
