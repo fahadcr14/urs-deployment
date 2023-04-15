@@ -2,15 +2,17 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
+from django.http import JsonResponse
 
 #First we have to i,port the model we want to use
 from .models import User_Data
 import os
 #
 import openpyxl
+
 from django.shortcuts import render
 from .models import University
-
+from django.db.models import Q
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -102,14 +104,8 @@ def uploadd():
 
 
 def getyourdestination(request):
-    
-    universities = University.objects.all()
-    if request.method == 'POST':
-        university_name = request.POST['university']
-        university = University.objects.get(name=university_name)
-        return render(request, 'getyourdestination.html', {'universities': universities, 'university': university})
-    else:
-        return render(request, 'getyourdestination.html', {'universities': universities})
+    return render(request, 'getyourdestination.html')
+
 
 def contact(request):
     return render(request, 'contact.html')
@@ -118,3 +114,23 @@ def post(request, pk):
     return render(request, 'post.html', {'pk' : pk})
 
     
+def getname(request):
+    search = request.GET.get('search')
+    payload = []
+    if search:
+        objs = University.objects.filter(name__icontains=search)
+        for obj in objs:
+            payload.append({
+                'name': obj.name,
+                'impact_rank': obj.impact_rank,
+                'openness_rank': obj.openness_rank,
+                'global_rank': obj.global_rank
+            })
+    return JsonResponse({
+        'status': True,
+        'payload': payload
+    })
+
+
+            
+
