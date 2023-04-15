@@ -3,49 +3,170 @@
 <head>
 	<title>University Details</title>
 	{% load static %}
-	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-	<style>
-		.container {
-			margin-top: 50px;
-		}
-		h1 {
-			margin-bottom: 30px;
-		}
-	</style>
+	
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <title>Search Universities</title>
+    <script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
+
+    <!-- Additional CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link
+  rel="stylesheet"
+  href="https://unpkg.com/@trevoreyre/autocomplete-js/dist/style.css"/>
 </head>
 <body>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6 offset-md-3">
-				<h1>University Details</h1>
-				<form method="POST" action='getyourdestination'>
-					{% csrf_token %}
-					<div class="form-group">
-						<label for="university">Select University:</label>
-						<select class="form-control" id="university" name="university">
-              {% for u in universities %}
-                  {% if u.name == selected_university %}
-                      <option value="{{ u.name }}" selected>{{ u.name }}</option>
-                  {% else %}
-                      <option value="{{ u.name }}">{{ u.name }}</option>
-                  {% endif %}
-              {% endfor %}
-          </select>
-          
-					</div>
-					<button type="submit" class="btn btn-primary">Get Details</button>
-				</form>
-				{% if university %}
-				<hr>
-				<h2>{{ university.name }}</h2>
-				<p>Impact Rank: {{ university.impact_rank }}</p>
-				<p>Openness Rank: {{ university.openness_rank }}</p>
-					<p>Global Rank: {{ university.global_rank }}</p>
-				{% endif %}
-			</div>
-		</div>
-	</div>
+  <div class="ict-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-xs-12">
+          <ul class="left-info">
+            <li><a href="index">URS</a></li>              
+            <!-- <li class="logo"><img src="assets/images/logo.png" alt=""></li>               -->
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <ul class="right-icons">
+            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+            <li><a href="#"><i class="fa fa-behance"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href=""><h2>University Recommendation System</h2></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#top">Home
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about">About Us</a>
+            </li>  
+            <li class="nav-item">
+              <a class="nav-link" href="getyourdestination">Get Your Destination
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>                          
+            <li class="nav-item">
+              <a class="nav-link" href='contact'>Contact Us</a>
+            </li>
+            <li class="nav-item">
+              {% if user.is_authenticated %}
+              <a class="nav-link" href="logout">Logout</a>
+              {% else %}
+              <a  class="nav-link"  href="form">Login</a>
+              {% endif %}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+	<div class="container mt-5 pt-5">
+    <div class="col-md-6 mx-auto">
+      <h1>Search Across All Universities of Pakistan</h1>
+      <div id="autocomplete" class="autocomplete">
+        <input class="autocomplete-input" />
+        <ul class="autocomplete-result-list"></ul>
+      </div>
+      <div id="university-info"></div>
+    </div>
+  </div>
+  
+  <script>
+    new Autocomplete('#autocomplete', {
+      search: input => {
+        const url = `/get-name/?search=${input}`;
+        return new Promise(resolve => {
+          fetch(url)
+            .then(response => response.json())
+            .then(data => {
+              resolve(data.payload);
+            })
+        });
+      },
+      renderResult: (result, props) => {
+        let group = '';
+        if (result.index % 2 == 0) {
+          group = '<li class="group">Group</li>';
+        }
+        return `
+          ${group}
+          <li ${props}>
+            <div class='wiki-title' onclick="getUniversityData('${result['name']}', '${result['impact_rank']}', '${result['openness_rank']}', '${result['global_rank']}', this)">
+              ${result['name']}
+            </div>
+          </li>
+        `;
+      },
+      getResultValue: result => result['name']
+    });
+  
+    function getUniversityData(name, impact_rank, openness_rank, global_rank, el) {
+      const universityData = `
+        <div class="university-data">
+          <h2>${name}</h2>
+          <ul>
+            <li>Impact Rank: ${impact_rank}</li>
+            <li>Openness Rank: ${openness_rank}</li>
+            <li>Global Rank: ${global_rank}</li>
+          </ul>
+        </div>
+      `;
+      document.getElementById("university-info").innerHTML = universityData;
+    }
+  
+    document.getElementById("search-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const inputEl = document.getElementById("autocomplete");
+      const inputValue = inputEl.value;
+      const url = `/get-name/?search=${inputValue}`;
+  
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          const result = data.payload[0];
+          if (result) {
+            const name = result['name'];
+            const impact_rank = result['impact_rank'];
+            const openness_rank = result['openness_rank'];
+            const global_rank = result['global_rank'];
+            getUniversityData(name, impact_rank, openness_rank, global_rank);
+          }
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    });
+  </script>
+  
+
+
+  
+  
+  
 	<script src="{% static 'js/jquery.min.js' %}"></script>
 	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+  
 </body>
 </html>
