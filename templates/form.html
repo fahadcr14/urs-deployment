@@ -19,6 +19,9 @@
     <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
 
+    <link rel="stylesheet" href="{% static 'assets/css/style2.css' %}">
+
+    <script src="{% static 'assets/index.js' %}"></script>
   </head>
 
 
@@ -49,9 +52,21 @@
         <nav class="navbar navbar-expand-lg">
           <div class="container">
             <a class="navbar-brand" href="index="><h2>University Recommenders</h2></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="True" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
+            <div id="hamburger-icon" onclick="toggleMobileMenu(this)">
+              <div class="bar1"></div>
+              <div class="bar2"></div>
+              <div class="bar3"></div>
+              <ul class="mobile-menu">
+                <li><a href="index" style="color: white; font-size: 30px;">Home</a></li>
+                <li><a href="about"  style="color: black; font-size: 30px">About us</a></li>
+                <li><a href="getyourdestination" style="color: black; font-size: 30px">Get Your Destination</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="logout" style="color: black; font-size: 30px">Logout</a></li>
+                {% else %}
+                <li><a href="form" style="color: black; font-size: 30px">Login</a></li>
+                {% endif %}
+              </ul>
+            </div>
             <div class="collapse navbar-collapse" id="navbarResponsive">
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
