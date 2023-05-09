@@ -13,6 +13,8 @@ body {
 	  animation-name: slidein;
 	  animation-iteration-count: 1;
   }
+
+  
   
   @keyframes slidein {
 	0% {
@@ -1306,4 +1308,4 @@ a.filled-button2{
 	border-radius: 50px;
 	overflow: hidden;
   }
-  
+
